@@ -1,7 +1,7 @@
 .DS_Store
 */node_modules
 */dist
-
+**/*.exe
 
 # local env files
 .env.local

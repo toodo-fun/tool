@@ -1,0 +1,3 @@
+server:
+  port: 30612
+  prefix: /tool/server
