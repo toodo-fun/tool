@@ -15,7 +15,7 @@ func init() {
 	config.WithOptions(config.ParseEnv)
 	config.AddDriver(yamlv3.Driver)
 
-	err := config.LoadFiles("config/application.yml", "config/changelog.yml")
+	err := config.LoadFiles("config/application.yml", "config/changelog.yml", "config/navigation.yml")
 	if err != nil {
 		panic(err)
 	}
@@ -23,6 +23,10 @@ func init() {
 	changelog := global.Release{}
 	config.BindStruct("release", &changelog)
 	global.ChangeLog = changelog
+
+	navigation := global.Navigation{}
+	config.BindStruct("navigation", &navigation)
+	global.NavigationMenu = navigation
 
 	logrus.SetReportCaller(true)
 	logrus.SetFormatter(&nested.Formatter{

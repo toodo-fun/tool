@@ -1,0 +1,23 @@
+navigation:
+#  - title: 通用工具
+#    id: 100000
+#    describe: "通用工具合集"
+#    icon: "test"
+#    href: "test"
+#    children:
+#      - title: "PDF合并工具"
+#        id: 100001
+#        describe: "多个PDF合并为同一个PDF"
+#        icon: "test"
+#        href: "test"
+  - title: Windows工具
+    id: 200000
+    describe: "Windows工具合集"
+    icon: "test"
+    href: "test"
+    children:
+      - title: "windows11折叠/展开右键菜单"
+        id: 200001
+        describe: "Windows工具合集"
+        icon: "test"
+        href: "test"
