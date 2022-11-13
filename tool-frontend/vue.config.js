@@ -12,6 +12,15 @@ module.exports = {
           from: './server',
           to: 'server'
         },
+        win: {
+          icon: './public/favicon.ico',
+          target: [
+            {
+              target: 'nsis',
+              arch: [ 'x64' ]
+            }
+          ]
+        },
         nsis: {
           oneClick: false,
           allowElevation: true,

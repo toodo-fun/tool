@@ -1,6 +1,8 @@
 {
   "name": "tool",
   "version": "0.1.0",
+  "author": "Rui Ma",
+  "description": "tool —— 兔儿工具箱",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
