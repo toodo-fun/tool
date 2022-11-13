@@ -1,0 +1,5 @@
+release:
+  # 命名规范：主版本号.子版本号.阶段版本号-发布日期-开发阶段(alpha/beta/release)
+  - version: 1.0.1-221113-alpha
+    changelog:
+      - "[A] 增加windows11右键菜单折叠/展开工具"
