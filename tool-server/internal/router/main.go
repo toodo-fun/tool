@@ -8,6 +8,7 @@ import (
 	"tool-server/internal/core/response"
 	"tool-server/internal/core/router"
 	"tool-server/internal/router/windows/contextMenu"
+	"tool-server/internal/router/windows/platform"
 )
 
 func handleNotFound(c *gin.Context) {
@@ -29,6 +30,7 @@ func CreateRoute() *gin.Engine {
 	router.RegisterEngine(r)
 
 	contextMenu.InitRouter()
+	platform.InitRouter()
 
 	InitHealthRouter()
 

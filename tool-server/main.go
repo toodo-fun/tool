@@ -15,10 +15,14 @@ func init() {
 	config.WithOptions(config.ParseEnv)
 	config.AddDriver(yamlv3.Driver)
 
-	err := config.LoadFiles("config/application.yml")
+	err := config.LoadFiles("config/application.yml", "config/changelog.yml")
 	if err != nil {
 		panic(err)
 	}
+
+	changelog := global.Release{}
+	config.BindStruct("release", &changelog)
+	global.ChangeLog = changelog
 
 	logrus.SetReportCaller(true)
 	logrus.SetFormatter(&nested.Formatter{
