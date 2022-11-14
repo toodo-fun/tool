@@ -26,8 +26,13 @@ func handleUnfold(c *gin.Context) {
 	}
 }
 
+func handleGetFoldStatus(c *gin.Context) {
+	c.JSON(http.StatusOK, response.SuccessResponse(service.GetFoldStatus()))
+}
+
 func InitRouter() {
 	r := router.RegisterRouterGroup("windows/contextMenu")
 	r.GET("fold", handleFold)
 	r.GET("unfold", handleUnfold)
+	r.GET("status", handleGetFoldStatus)
 }

@@ -9,17 +9,22 @@ import (
 	"tool-server/internal/global"
 	"tool-server/internal/router"
 	"tool-server/internal/utils/client/db"
-	"tool-server/internal/utils/path"
 )
 
 func init() {
 	config.WithOptions(config.ParseEnv)
 	config.AddDriver(yamlv3.Driver)
 
+	//configFiles := []string{
+	//	fmt.Sprintf("%s/config/application.yml", path.GetPlatformRoot()),
+	//	fmt.Sprintf("%s/config/changelog.yml", path.GetPlatformRoot()),
+	//	fmt.Sprintf("%s/config/navigation.yml", path.GetPlatformRoot()),
+	//}
+
 	configFiles := []string{
-		fmt.Sprintf("%s/config/application.yml", path.GetPlatformRoot()),
-		fmt.Sprintf("%s/config/changelog.yml", path.GetPlatformRoot()),
-		fmt.Sprintf("%s/config/navigation.yml", path.GetPlatformRoot()),
+		"config/application.yml",
+		"config/changelog.yml",
+		"config/navigation.yml",
 	}
 
 	err := config.LoadFiles(configFiles...)
