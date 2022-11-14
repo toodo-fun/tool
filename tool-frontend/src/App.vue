@@ -3,29 +3,29 @@
     <el-container class="main-container">
       <el-header>
         <el-row justify="space-between">
-          <el-col :span="6" style="text-align: left">
+          <el-col :span="4" style="text-align: left">
             <div class="header-title">
               <el-avatar class="header-avatar" size="small" src="/favicon.ico" />
               <div>兔儿工具箱</div>
             </div>
           </el-col>
-          <el-col :span="6" style="text-align: center">
+          <el-col :span="16" style="text-align: center">
             啦啦啦啦啦
           </el-col>
-          <el-col :span="6" style="text-align: right">
-            <el-button-group class="ml-4">
-              <el-button color="transparent" size="small">
-                <el-icon>
+          <el-col :span="4" style="text-align: right">
+            <el-button-group class="ml-4" size="small">
+              <el-button color="transparent" text @click="forceBlur">
+                <el-icon color="gray">
                   <SemiSelect />
                 </el-icon>
               </el-button>
-              <el-button color="transparent" type="primary" size="small">
-                <el-icon>
+              <el-button color="transparent" text @click="forceBlur">
+                <el-icon color="gray">
                   <FullScreen />
                 </el-icon>
               </el-button>
-              <el-button color="transparent" type="primary" size="small">
-                <el-icon>
+              <el-button color="transparent" text @click="forceBlur">
+                <el-icon color="gray">
                   <CloseBold />
                 </el-icon>
               </el-button>
@@ -109,7 +109,7 @@ html body {
   margin: 0;
   padding: 0;
 
-  --header-height: 28px;
+  --header-height: 24px;
 }
 
 .common-layout {
@@ -178,7 +178,14 @@ export default {
     handleCollapse() {
       console.log(123);
       this.isCollapse = !this.isCollapse
-    }
+    },
+    forceBlur(evt) {
+      let target = evt.target
+      while (target.nodeName !== "BUTTON") {
+        target = target.parentNode
+      }
+      target.blur()
+    },
   }
 }
 </script>
