@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, ipcMain } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain, remote } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -59,7 +59,9 @@ async function createWindow() {
 
   ipcMain.on('windowMin', () => { win.minimize() })
   ipcMain.on('windowMax', () => {
-    if (win.isMinimized()) { win.restore() } else { win.maximize() }
+    if (win.isMaximized()) {
+      win.restore()
+    } else { win.maximize() }
   })
   ipcMain.on('windowClose', () => {
     win.close()
