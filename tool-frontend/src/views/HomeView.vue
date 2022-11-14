@@ -1,5 +1,6 @@
 <template>
-  <div class="home">
+  <div class="home" v-loading="loading"
+    element-loading-text="服务启动中...">
     <el-timeline>
       <el-timeline-item center v-for="(item, index) in changelog" :timestamp="item.version" :key="index"
         size="large" color="#0bbd87" placement="top">
@@ -19,19 +20,24 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+
 export default {
   name: 'HomeView',
   components: {
   },
   data: function () {
     return {
-      changelog: []
+      changelog: [],
+      loading: ref(false)
     }
   },
   mounted() {
+    this.loading = true
     const url = "/platform/changelog"
     this.$service.get(url).then((res) => {
       this.changelog = res
+      this.loading = false
     })
   },
 }
