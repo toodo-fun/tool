@@ -14,17 +14,17 @@
           </el-col>
           <el-col :span="4" style="text-align: right">
             <el-button-group class="ml-4" size="small">
-              <el-button color="transparent" text @click="forceBlur">
+              <el-button color="transparent" text @click="bthMinimize">
                 <el-icon color="gray">
                   <SemiSelect />
                 </el-icon>
               </el-button>
-              <el-button color="transparent" text @click="forceBlur">
+              <el-button color="transparent" text @click="btnMaximize">
                 <el-icon color="gray">
                   <FullScreen />
                 </el-icon>
               </el-button>
-              <el-button color="transparent" text @click="forceBlur">
+              <el-button color="transparent" text @click="btnWinClose">
                 <el-icon color="gray">
                   <CloseBold />
                 </el-icon>
@@ -167,6 +167,7 @@ html body {
 
 <script>
 import { ref } from 'vue'
+const ipcRenderer = window.electron.ipcRenderer
 
 export default {
   data: function () {
@@ -186,6 +187,18 @@ export default {
       }
       target.blur()
     },
+    bthMinimize(evt) {
+      this.forceBlur(evt)
+      ipcRenderer.send('windowMin')
+    },
+    btnMaximize(evt) {
+      this.forceBlur(evt)
+      ipcRenderer.send('windowMax')
+    },
+    btnWinClose(evt) {
+      this.forceBlur(evt)
+      ipcRenderer.send('windowClose')
+    }
   }
 }
 </script>

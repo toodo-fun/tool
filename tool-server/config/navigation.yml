@@ -13,11 +13,11 @@ navigation:
   - title: Windows工具
     id: 200000
     describe: "Windows工具合集"
-    icon: "test"
-    href: "test"
+    icon: "https://tse4-mm.cn.bing.net/th/id/OIP-C.KCC7Q_I7oFzYEgVwxqv1egHaEM?pid=ImgDet&rs=1"
+    href: "https://tse4-mm.cn.bing.net/th/id/OIP-C.KCC7Q_I7oFzYEgVwxqv1egHaEM?pid=ImgDet&rs=1"
     children:
-      - title: "windows11折叠/展开右键菜单"
+      - title: "windows11优化"
         id: 200001
-        describe: "Windows工具合集"
-        icon: "test"
-        href: "test"
+        describe: "Windows11优化"
+        icon: "https://tse4-mm.cn.bing.net/th/id/OIP-C.KCC7Q_I7oFzYEgVwxqv1egHaEM?pid=ImgDet&rs=1"
+        href: "https://tse4-mm.cn.bing.net/th/id/OIP-C.KCC7Q_I7oFzYEgVwxqv1egHaEM?pid=ImgDet&rs=1"
