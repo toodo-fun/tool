@@ -12,7 +12,7 @@
           <el-col :span="18" class="header-message">
             也许命运扼住你的咽喉，只是让你少吃两口。
           </el-col>
-          <el-col :span="3" style="text-align: right; padding-right: 6px;">
+          <el-col :span="3" class="header-tool" style="text-align: right; padding-right: 6px;">
             <el-button-group class="ml-4" size="small">
               <el-button color="transparent" text @click="bthMinimize">
                 <el-icon color="gray">
@@ -114,6 +114,7 @@ html body {
   height: 100%;
   margin: 0;
   padding: 0;
+  -webkit-user-select: none;
 
   --header-height: 32px;
 }
@@ -149,6 +150,17 @@ html body {
     border: 1px solid #fff;
     border-style: none solid;
     padding: 0 8px;
+  }
+
+  .el-header,
+  .header-message,
+  .header-avatar,
+  .header-title {
+    -webkit-app-region: drag;
+  }
+
+  .header-tool {
+    -webkit-app-region: none;
   }
 
   .el-header,

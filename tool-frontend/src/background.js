@@ -59,7 +59,7 @@ async function createWindow() {
 
   ipcMain.on('windowMin', () => { win.minimize() })
   ipcMain.on('windowMax', () => {
-    if (win.isMinimized()) { win.setSize(winWidth, winHeight) } else { win.maximize() }
+    if (win.isMinimized()) { win.restore() } else { win.maximize() }
   })
   ipcMain.on('windowClose', () => {
     win.close()
