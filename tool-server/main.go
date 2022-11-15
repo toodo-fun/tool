@@ -5,7 +5,9 @@ import (
 	nested "github.com/antonfisher/nested-logrus-formatter"
 	"github.com/gookit/config/v2"
 	"github.com/gookit/config/v2/yamlv3"
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/sirupsen/logrus"
+	"os"
 	"tool-server/internal/global"
 	"tool-server/internal/router"
 	"tool-server/internal/utils/client/db"
@@ -13,20 +15,26 @@ import (
 )
 
 func init() {
+	devMode := os.Getenv("GO_DEVELOP")
+	logrus.Infof("devMode: %+v", devMode)
+
 	config.WithOptions(config.ParseEnv)
 	config.AddDriver(yamlv3.Driver)
 
-	configFiles := []string{
-		fmt.Sprintf("%s/config/application.yml", path.GetPlatformRoot()),
-		fmt.Sprintf("%s/config/changelog.yml", path.GetPlatformRoot()),
-		fmt.Sprintf("%s/config/navigation.yml", path.GetPlatformRoot()),
+	var configFiles []string
+	if devMode == "true" {
+		configFiles = []string{
+			"config/application.yml",
+			"config/changelog.yml",
+			"config/navigation.yml",
+		}
+	} else {
+		configFiles = []string{
+			fmt.Sprintf("%s/config/application.yml", path.GetPlatformRoot()),
+			fmt.Sprintf("%s/config/changelog.yml", path.GetPlatformRoot()),
+			fmt.Sprintf("%s/config/navigation.yml", path.GetPlatformRoot()),
+		}
 	}
-
-	//configFiles := []string{
-	//	"config/application.yml",
-	//	"config/changelog.yml",
-	//	"config/navigation.yml",
-	//}
 
 	err := config.LoadFiles(configFiles...)
 	if err != nil {

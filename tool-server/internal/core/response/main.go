@@ -56,15 +56,15 @@ func DefaultSuccessResponse() *Response {
 	return &Response{
 		Code:    CodeSuccess,
 		Message: GetResponseMessage(CodeSuccess),
-		Result:  nil,
+		Result:  true,
 	}
 }
 
-func ErrorResponse(code string, result any) *Response {
+func ErrorResponse(code string, message string) *Response {
 	return &Response{
 		Code:    code,
-		Message: GetResponseMessage(code),
-		Result:  result,
+		Message: message,
+		Result:  nil,
 	}
 }
 
