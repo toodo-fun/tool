@@ -19,6 +19,14 @@
               </template>
             </CellCardItem>
           </el-col>
+          <el-col :span="24">
+            <CellCardItem title="PDF合并工具" desc="PDF合并工具，支持手动排序等"
+              avatar="https://i0.wp.com/null48.com/wp-content/uploads/2018/01/PDF-Reader-Pro-Ipa-App-iOS-Free-Download.jpg">
+              <template #right>
+                <el-button type="primary" :icon="Edit" text @click="$router.push('/pdfMerge')">打开</el-button>
+              </template>
+            </CellCardItem>
+          </el-col>
         </el-row>
       </el-col>
       <el-col :span="8" style="background: rgba(255, 255, 255, 0.8); ">

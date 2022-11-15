@@ -24,6 +24,7 @@
     "element-plus": "^2.2.21",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
+    "vuedraggable": "^4.1.0",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
