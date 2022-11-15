@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"tool-server/internal/core/response"
 	"tool-server/internal/core/router"
+	"tool-server/internal/router/universal/downloadSpeedUp"
 	"tool-server/internal/router/windows/contextMenu"
 	"tool-server/internal/router/windows/platform"
 )
@@ -31,6 +32,7 @@ func CreateRoute() *gin.Engine {
 
 	contextMenu.InitRouter()
 	platform.InitRouter()
+	downloadSpeedUp.InitRouter()
 
 	InitHealthRouter()
 
