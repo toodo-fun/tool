@@ -13,7 +13,7 @@ import (
 )
 
 func init() {
-	devMode := true
+	devMode := false
 
 	config.WithOptions(config.ParseEnv)
 	config.AddDriver(yamlv3.Driver)
