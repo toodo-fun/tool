@@ -47,7 +47,7 @@
               </el-icon>
               <template #title>主页</template>
             </el-menu-item>
-            <el-menu-item index="1">
+            <!-- <el-menu-item index="1">
               <el-icon size="24">
                 <svg t="1668430791791" class="icon" viewBox="0 0 1024 1024" version="1.1"
                   xmlns="http://www.w3.org/2000/svg" p-id="1430" width="200" height="200">
@@ -57,7 +57,7 @@
                 </svg>
               </el-icon>
               <template #title>通用工具</template>
-            </el-menu-item>
+            </el-menu-item> -->
             <el-menu-item index="/windows">
               <el-icon size="24">
                 <svg t="1668430732657" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -69,7 +69,7 @@
               </el-icon>
               <template #title>Windows工具</template>
             </el-menu-item>
-            <el-menu-item index="3">
+            <!-- <el-menu-item index="/downloadSpeedUp">
               <el-icon size="24">
                 <svg t="1668430758746" class="icon" viewBox="0 0 1024 1024" version="1.1"
                   xmlns="http://www.w3.org/2000/svg" p-id="1146" width="200" height="200">
@@ -79,7 +79,7 @@
                 </svg>
               </el-icon>
               <template #title>开发者工具</template>
-            </el-menu-item>
+            </el-menu-item> -->
           </el-menu>
           <div class="aside-tool">
             <el-button type="danger" v-if="!isCollapse" circle @click="handleCollapse">
@@ -189,8 +189,32 @@ html body {
   .el-main {
     background-color: var(--el-color-primary-light-9);
     color: var(--el-text-color-primary);
-    height: 100%;
+    height: calc(100vh - var(--header-height));
+    overflow: hidden;
     padding: 0;
+  }
+
+
+  // 滚动条宽度
+  div::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  // 滚动条轨道
+  div::-webkit-scrollbar-track {
+    background: rgb(239, 239, 239);
+    border-radius: 2px;
+  }
+
+  // 小滑块
+  div::-webkit-scrollbar-thumb {
+    background: #40a0ff49;
+    border-radius: 10px;
+  }
+
+  div::-webkit-scrollbar-thumb:hover {
+    background: #40a0ff;
   }
 }
 </style>
@@ -209,10 +233,6 @@ export default {
 
   },
   mounted() {
-    const url = "/platform/navigation"
-    this.$service.get(url).then((res) => {
-      console.log(res);
-    })
   },
   methods: {
     handleCollapse() {

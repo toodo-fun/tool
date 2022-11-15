@@ -13,13 +13,13 @@ import (
 )
 
 func init() {
-	devMode := ""
+	devMode := true
 
 	config.WithOptions(config.ParseEnv)
 	config.AddDriver(yamlv3.Driver)
 
 	var configFiles []string
-	if devMode == "true" {
+	if devMode {
 		configFiles = []string{
 			"config/application.yml",
 			"config/changelog.yml",
