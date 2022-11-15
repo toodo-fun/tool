@@ -5,9 +5,7 @@ import (
 	nested "github.com/antonfisher/nested-logrus-formatter"
 	"github.com/gookit/config/v2"
 	"github.com/gookit/config/v2/yamlv3"
-	_ "github.com/joho/godotenv/autoload"
 	"github.com/sirupsen/logrus"
-	"os"
 	"tool-server/internal/global"
 	"tool-server/internal/router"
 	"tool-server/internal/utils/client/db"
@@ -15,8 +13,7 @@ import (
 )
 
 func init() {
-	devMode := os.Getenv("GO_DEVELOP")
-	logrus.Infof("devMode: %+v", devMode)
+	devMode := ""
 
 	config.WithOptions(config.ParseEnv)
 	config.AddDriver(yamlv3.Driver)
