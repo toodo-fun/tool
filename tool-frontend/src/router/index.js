@@ -15,7 +15,12 @@ const routes = [
   {
     path: '/downloadSpeedUp',
     name: 'downloadSpeedUp',
-    component: () => import(/* webpackChunkName: "windows" */ '../views/DownloadSpeedUpView.vue')
+    component: () => import(/* webpackChunkName: "downloadSpeedUp" */ '../views/DownloadSpeedUpView.vue')
+  },
+  {
+    path: '/pdf',
+    name: 'pdfMerge',
+    component: () => import(/* webpackChunkName: "pdf" */ '../views/PDFView.vue')
   },
   {
     path: '/about',

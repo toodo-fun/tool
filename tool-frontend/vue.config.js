@@ -2,6 +2,12 @@ const AutoImport = require('unplugin-auto-import/webpack')
 const Components = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
+const path = require('path')
+
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
+
 module.exports = {
   pluginOptions: {
     electronBuilder: {
@@ -48,6 +54,17 @@ module.exports = {
       Components({
         resolvers: [ElementPlusResolver()],
       }),
-    ]
+    ],
+    resolve: {
+      alias: {
+        "@": resolve("src"),
+      },
+      fallback: {
+        path: require.resolve("path-browserify"),
+      },
+    },
+    externals: {
+      'electron': 'require("electron")'
+    },
   }
 }

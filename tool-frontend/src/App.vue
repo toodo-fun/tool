@@ -69,7 +69,7 @@
               </el-icon>
               <template #title>Windows工具</template>
             </el-menu-item>
-            <!-- <el-menu-item index="/downloadSpeedUp">
+            <el-menu-item index="/pdf">
               <el-icon size="24">
                 <svg t="1668430758746" class="icon" viewBox="0 0 1024 1024" version="1.1"
                   xmlns="http://www.w3.org/2000/svg" p-id="1146" width="200" height="200">
@@ -79,7 +79,7 @@
                 </svg>
               </el-icon>
               <template #title>开发者工具</template>
-            </el-menu-item> -->
+            </el-menu-item>
           </el-menu>
           <div class="aside-tool">
             <el-button type="danger" v-if="!isCollapse" circle @click="handleCollapse">
