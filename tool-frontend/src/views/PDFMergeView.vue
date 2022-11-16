@@ -36,6 +36,13 @@
                     </el-icon>
                 </el-button>
             </el-tooltip>
+            <el-tooltip content="清空文件" placement="bottom" effect="light">
+                <el-button type="success" circle plain @click="clearPDF" v-if="inFiles.length >= 2">
+                    <el-icon>
+                        <Close />
+                    </el-icon>
+                </el-button>
+            </el-tooltip>
         </div>
     </div>
 </template>
@@ -106,6 +113,9 @@ export default {
         deletePDF(md5) {
             const tmp = this.inFiles.filter((item) => item.md5 !== md5)
             this.inFiles = tmp
+        },
+        clearPDF() {
+            this.inFiles = []
         }
     }
 }
@@ -124,6 +134,7 @@ export default {
 .header {
     padding: 20px;
     text-align: center;
+
     .title {
         font-size: 28px;
     }
