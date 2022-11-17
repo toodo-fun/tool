@@ -29,12 +29,12 @@ func handleMergePDF(c *gin.Context) {
 		c.JSON(http.StatusOK, response.DefaultErrorResponse(response.CodeParamError))
 		return
 	}
-	err = service.MergePDF(params.InFiles, params.OutFile)
+	outFile, err := service.MergePDF(params.InFiles, params.OutFile)
 	if err != nil {
 		c.JSON(http.StatusOK, response.DefaultErrorResponse(response.CodeSystemError))
 		return
 	}
-	c.JSON(http.StatusOK, response.DefaultSuccessResponse())
+	c.JSON(http.StatusOK, response.SuccessResponse(outFile))
 }
 
 func handleSplitPDF(c *gin.Context) {

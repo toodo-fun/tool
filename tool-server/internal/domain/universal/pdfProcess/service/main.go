@@ -3,9 +3,13 @@ package service
 import (
 	"crypto/md5"
 	"encoding/hex"
+	"fmt"
+	"github.com/google/uuid"
 	"github.com/pdfcpu/pdfcpu/pkg/api"
 	"io"
 	"os"
+	"strings"
+	"tool-server/internal/utils/path"
 )
 
 type PDFInfo struct {
@@ -33,6 +37,9 @@ func SplitPDF(inFile string, outDir string, span int) (err error) {
 	return api.SplitFile(inFile, outDir, span, nil)
 }
 
-func MergePDF(inFile []string, outFile string) (err error) {
-	return api.MergeCreateFile(inFile, outFile, nil)
+func MergePDF(inFile []string, outFile string) (oFile string, err error) {
+	if path.IsExist(outFile) {
+		outFile = strings.Replace(outFile, "result.pdf", fmt.Sprintf("%s.pdf", uuid.New().String()), -1)
+	}
+	return outFile, api.MergeCreateFile(inFile, outFile, nil)
 }
