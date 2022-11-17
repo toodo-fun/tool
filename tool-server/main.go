@@ -5,7 +5,9 @@ import (
 	nested "github.com/antonfisher/nested-logrus-formatter"
 	"github.com/gookit/config/v2"
 	"github.com/gookit/config/v2/yamlv3"
+	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
+	"os"
 	"tool-server/internal/global"
 	"tool-server/internal/router"
 	"tool-server/internal/utils/client/db"
@@ -13,13 +15,24 @@ import (
 )
 
 func init() {
-	devMode := false
+	// 生产环境下没有该文件，防止报错
+	if !path.IsExist(".env") {
+		os.Create(".env")
+	}
+
+	err := godotenv.Load()
+	if err != nil {
+		logrus.Fatalln(err)
+	}
+
+	runModel := os.Getenv("RUN_MODEL")
+	logrus.Infof("runModel: %+v", runModel)
 
 	config.WithOptions(config.ParseEnv)
 	config.AddDriver(yamlv3.Driver)
 
 	var configFiles []string
-	if devMode {
+	if runModel == "DEBUG" {
 		configFiles = []string{
 			"config/application.yml",
 			"config/changelog.yml",
@@ -33,7 +46,7 @@ func init() {
 		}
 	}
 
-	err := config.LoadFiles(configFiles...)
+	err = config.LoadFiles(configFiles...)
 	if err != nil {
 		panic(err)
 	}

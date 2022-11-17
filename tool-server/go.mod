@@ -9,6 +9,7 @@ require (
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/google/uuid v1.3.0
 	github.com/gookit/config/v2 v2.1.7
+	github.com/joho/godotenv v1.4.0
 	github.com/pdfcpu/pdfcpu v0.3.13
 	github.com/sirupsen/logrus v1.9.0
 	gorm.io/driver/sqlite v1.4.3

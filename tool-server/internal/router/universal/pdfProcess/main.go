@@ -2,6 +2,7 @@ package pdfProcess
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 	"net/http"
 	"tool-server/internal/core/response"
 	"tool-server/internal/core/router"
@@ -36,8 +37,30 @@ func handleMergePDF(c *gin.Context) {
 	c.JSON(http.StatusOK, response.DefaultSuccessResponse())
 }
 
+func handleSplitPDF(c *gin.Context) {
+	type SplitPDF struct {
+		Infile string `json:"infile"`
+		OutDir string `json:"outDir"`
+		Span   int    `json:"span"`
+	}
+	params := SplitPDF{}
+	err := c.Bind(&params)
+	if err != nil {
+		logrus.Error(err)
+		c.JSON(http.StatusOK, response.DefaultErrorResponse(response.CodeParamError))
+		return
+	}
+	err = service.SplitPDF(params.Infile, params.OutDir, params.Span)
+	if err != nil {
+		c.JSON(http.StatusOK, response.DefaultErrorResponse(response.CodeSystemError))
+		return
+	}
+	c.JSON(http.StatusOK, response.DefaultSuccessResponse())
+}
+
 func InitRouter() {
 	r := router.RegisterRouterGroup("pdf")
 	r.GET("info", handleGetPDFInfo)
 	r.POST("merge", handleMergePDF)
+	r.POST("split", handleSplitPDF)
 }
