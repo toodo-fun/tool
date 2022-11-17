@@ -4,7 +4,6 @@
 **/*.exe
 tool-server/db
 db
-tool-server/.env
 
 # local env files
 .env.local
