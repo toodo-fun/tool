@@ -4,7 +4,7 @@
             <div class="title">🅿🅳🅵&nbsp;&nbsp;&nbsp;&nbsp;🅼🅴🆁🅶🅴</div>
             <div class="desc">PDF合并工具，支持上下拖拽排序</div>
         </div>
-        <draggable :list="inFiles" item-key="filename" @end="onDragEnd">
+        <draggable :list="inFiles" item-key="filename">
             <template #item="{ element }">
                 <CellCardItem :title="element.filename" :desc="element.desc"
                     avatar="https://i0.wp.com/null48.com/wp-content/uploads/2018/01/PDF-Reader-Pro-Ipa-App-iOS-Free-Download.jpg">
@@ -29,15 +29,15 @@
                 </el-button>
                 <el-button v-else type="primary" plain @click="addPDF">点击添加第一个PDF文件</el-button>
             </el-tooltip>
-            <el-tooltip content="开始合并" placement="bottom" effect="light">
-                <el-button type="success" circle plain @click="mergePDF" v-if="inFiles.length >= 2">
+            <el-tooltip content="开始合并" placement="bottom" effect="light" v-if="inFiles.length >= 2">
+                <el-button type="success" circle plain @click="mergePDF">
                     <el-icon>
                         <HelpFilled />
                     </el-icon>
                 </el-button>
             </el-tooltip>
-            <el-tooltip content="清空文件" placement="bottom" effect="light">
-                <el-button type="success" circle plain @click="clearPDF" v-if="inFiles.length >= 2">
+            <el-tooltip content="清空文件" placement="bottom" effect="light" v-if="inFiles.length >= 2">
+                <el-button type="success" circle plain @click="clearPDF">
                     <el-icon>
                         <Close />
                     </el-icon>
@@ -48,10 +48,9 @@
 </template>
   
 <script>
-import { dialog } from '@electron/remote'
+import { dialog, Notification } from '@electron/remote'
 import draggable from 'vuedraggable'
 import CellCardItem from '@/components/CellCardItem.vue'
-import { ElMessage } from 'element-plus'
 import path from 'path'
 
 export default {
@@ -80,13 +79,15 @@ export default {
                 result.filePaths.forEach((item) => {
                     const url = "/pdf/info?filepath=" + item
                     this.$service.get(url).then((res) => {
-                        if (!this.inFiles.find((item) => item.md5 === res.md5)) {
-                            this.inFiles.push(
-                                { filename: res.filename, desc: "文档页数: " + res.page + " md5: " + res.md5, md5: res.md5 }
-                            )
-                        } else {
-                            ElMessage.warning("该文件已经添加")
-                        }
+                        // 支持同一文件多次添加
+                        this.inFiles.push(
+                            { filename: res.filename, desc: "文档页数: " + res.page + " md5: " + res.md5, md5: res.md5 }
+                        )
+                        // if (!this.inFiles.find((item) => item.md5 === res.md5) || true) {
+
+                        // } else {
+                        //     ElMessage.warning("该文件已经添加")
+                        // }
                     })
                 })
             })
@@ -96,6 +97,9 @@ export default {
                 title: "选择要保存的位置",
                 properties: ["openDirectory"],
             }).then(result => {
+                if (result.canceled) {
+                    return
+                }
                 let inFs = []
                 this.inFiles.forEach((item) => {
                     inFs.push(item.filename)
@@ -106,7 +110,9 @@ export default {
                 }
                 const url = "/pdf/merge"
                 this.$service.post(url, payload).then(() => {
-                    ElMessage.success("合并成功")
+                    // ElMessage.success("合并成功")
+                    new Notification({ title: "文件合并成功", body: "文件路径: " + result.filePaths[0] }).show();
+                    window.openDefaultBrowser(result.filePaths[0])
                 })
             })
         },
