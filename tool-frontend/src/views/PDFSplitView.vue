@@ -1,8 +1,8 @@
 <template>
     <div class="PDF">
         <div class="header">
-            <div class="title">🅿🅳🅵&nbsp;&nbsp;&nbsp;&nbsp;🅼🅴🆁🅶🅴</div>
-            <div class="desc">PDF合并工具，支持上下拖拽排序</div>
+            <div class="title">🅿🅳🅵&nbsp;&nbsp;&nbsp;&nbsp;🆂🅿🅻🅸🆃</div>
+            <div class="desc">PDF分割工具，支持将一个PDF分割为多个文件</div>
         </div>
         <draggable :list="inFiles" item-key="filename">
             <template #item="{ element }">
@@ -22,21 +22,16 @@
         </draggable>
         <div style="text-align: center;">
             <el-tooltip content="添加文件" placement="bottom" effect="light">
-                <el-button v-if="inFiles.length > 0" type="primary" circle plain @click="addPDF">
-                    <el-icon>
-                        <Plus />
-                    </el-icon>
-                </el-button>
-                <el-button v-else type="primary" plain @click="addPDF">点击添加第一个PDF文件</el-button>
+                <el-button v-if="inFiles.length == 0" type="primary" plain @click="addPDF">点击添加一个PDF文件</el-button>
             </el-tooltip>
-            <el-tooltip content="开始合并" placement="bottom" effect="light" v-if="inFiles.length >= 2">
-                <el-button type="success" circle plain @click="mergePDF">
+            <el-tooltip content="分割文件" placement="bottom" effect="light" v-if="inFiles.length >= 1">
+                <el-button type="success" circle plain @click="dialogFormVisible = true">
                     <el-icon>
-                        <HelpFilled />
+                        <Grid />
                     </el-icon>
                 </el-button>
             </el-tooltip>
-            <el-tooltip content="清空文件" placement="bottom" effect="light" v-if="inFiles.length >= 2">
+            <el-tooltip content="清空文件" placement="bottom" effect="light" v-if="inFiles.length >= 1">
                 <el-button type="danger" circle plain @click="clearPDF">
                     <el-icon>
                         <Close />
@@ -44,14 +39,27 @@
                 </el-button>
             </el-tooltip>
         </div>
+        <el-dialog v-model="dialogFormVisible" :show-close="false">
+            每
+            <el-input-number v-model="span" :step="1" step-strictly :min="1" :max="inFiles[0].page"
+                style="width: fit-content" /> 页进行分割
+            <template #footer>
+                <span class="dialog-footer">
+                    <el-button @click="dialogFormVisible = false">取消</el-button>
+                    <el-button type="primary" @click="splitPDF">
+                        分割
+                    </el-button>
+                </span>
+            </template>
+        </el-dialog>
     </div>
 </template>
   
 <script>
+import { ref } from 'vue'
 import { dialog, Notification } from '@electron/remote'
 import draggable from 'vuedraggable'
 import CellCardItem from '@/components/CellCardItem.vue'
-import path from 'path'
 
 export default {
     components: {
@@ -60,6 +68,8 @@ export default {
     },
     data: function () {
         return {
+            dialogFormVisible: ref(false),
+            span: 1,
             input: "",
             inFiles: [
 
@@ -81,7 +91,7 @@ export default {
                     this.$service.get(url).then((res) => {
                         // 支持同一文件多次添加
                         this.inFiles.push(
-                            { filename: res.filename, desc: "文档页数: " + res.page + " md5: " + res.md5, md5: res.md5 }
+                            { filename: res.filename, desc: "文档页数: " + res.page + " md5: " + res.md5, md5: res.md5, page: res.page }
                         )
                         // if (!this.inFiles.find((item) => item.md5 === res.md5) || true) {
 
@@ -92,7 +102,7 @@ export default {
                 })
             })
         },
-        async mergePDF() {
+        async splitPDF() {
             dialog.showOpenDialog({
                 title: "选择要保存的位置",
                 properties: ["openDirectory"],
@@ -105,14 +115,16 @@ export default {
                     inFs.push(item.filename)
                 })
                 const payload = {
-                    inFiles: inFs,
-                    outFile: result.filePaths[0] + path.sep + "result.pdf"
+                    infile: inFs[0],
+                    outDir: result.filePaths[0],
+                    span: 1
                 }
-                const url = "/pdf/merge"
+                console.log(payload);
+                const url = "/pdf/split"
                 this.$service.post(url, payload).then(() => {
-                    // ElMessage.success("合并成功")
-                    new Notification({ title: "文件合并成功", body: "文件路径: " + result.filePaths[0] }).show();
+                    new Notification({ title: "文件分割成功", body: "文件路径: " + result.filePaths[0] }).show();
                     window.openDefaultBrowser(result.filePaths[0])
+                    this.dialogFormVisible = false
                 })
             })
         },

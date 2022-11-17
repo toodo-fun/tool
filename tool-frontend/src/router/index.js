@@ -20,7 +20,12 @@ const routes = [
   {
     path: '/pdfMerge',
     name: 'pdfMerge',
-    component: () => import(/* webpackChunkName: "pdf" */ '../views/PDFMergeView.vue')
+    component: () => import(/* webpackChunkName: "pdfMerge" */ '../views/PDFMergeView.vue')
+  },
+  {
+    path: '/pdfSplit',
+    name: 'pdfSplit',
+    component: () => import(/* webpackChunkName: "pdfSplit" */ '../views/PDFSplitView.vue')
   },
   {
     path: '/about',

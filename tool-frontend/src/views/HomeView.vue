@@ -20,10 +20,18 @@
             </CellCardItem>
           </el-col>
           <el-col :span="24">
-            <CellCardItem title="PDF合并工具" desc="PDF合并工具，支持手动排序等"
+            <CellCardItem title="PDF合并工具" desc="PDF合并工具，支持将多个PDF文件合并为同一个文件"
               avatar="https://i0.wp.com/null48.com/wp-content/uploads/2018/01/PDF-Reader-Pro-Ipa-App-iOS-Free-Download.jpg">
               <template #right>
                 <el-button type="primary" :icon="Edit" text @click="$router.push('/pdfMerge')">打开</el-button>
+              </template>
+            </CellCardItem>
+          </el-col>
+          <el-col :span="24">
+            <CellCardItem title="PDF分割工具" desc="PDF分割工具，支持将一个PDF分割为多个文件"
+              avatar="https://i0.wp.com/null48.com/wp-content/uploads/2018/01/PDF-Reader-Pro-Ipa-App-iOS-Free-Download.jpg">
+              <template #right>
+                <el-button type="primary" :icon="Edit" text @click="$router.push('/pdfSplit')">打开</el-button>
               </template>
             </CellCardItem>
           </el-col>
