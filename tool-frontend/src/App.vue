@@ -35,7 +35,7 @@
       </el-header>
       <el-container>
         <el-aside>
-          <el-menu :default-active="$route.path" class="el-menu-vertical-demo" :collapse="true" router>
+          <el-menu :default-active="$route.path" class="el-menu-vertical-demo" :collapse="isCollapse" router>
             <el-menu-item index="/">
               <el-icon size="24">
                 <svg t="1668430775193" class="icon" viewBox="0 0 1024 1024" version="1.1"
