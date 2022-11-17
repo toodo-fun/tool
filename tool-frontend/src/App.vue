@@ -6,7 +6,7 @@
           <el-col :span="3" style="text-align: left">
             <div class="header-title">
               <el-avatar class="header-avatar" size="small" src="/favicon.ico" />
-              <div>兔儿工具箱</div>
+              <!-- <div>兔儿工具箱</div> -->
             </div>
           </el-col>
           <el-col :span="18" class="header-message">

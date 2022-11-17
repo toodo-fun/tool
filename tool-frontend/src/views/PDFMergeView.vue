@@ -109,10 +109,10 @@ export default {
                     outFile: result.filePaths[0] + path.sep + "result.pdf"
                 }
                 const url = "/pdf/merge"
-                this.$service.post(url, payload).then(() => {
+                this.$service.post(url, payload).then((res) => {
                     // ElMessage.success("合并成功")
-                    new Notification({ title: "文件合并成功", body: "文件路径: " + result.filePaths[0] }).show();
-                    window.openDefaultBrowser(result.filePaths[0])
+                    new Notification({ title: "文件合并成功", body: "文件路径: " + res }).show();
+                    window.openDefaultBrowser(res)
                 })
             })
         },
