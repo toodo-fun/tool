@@ -76,6 +76,11 @@ func init() {
 	dBClient := db.NewDbClient(config.String("database.source"), config.Int("database.maxOpenConn"), config.Int("database.maxIdleConn"), config.Int("database.connMaxLifeTime"))
 	global.DBClient = dBClient
 	global.DBMaxThread = make(chan struct{}, config.Int("database.maxOpenConn"))
+
+	// test 代码
+	//d := downloader.CreateDownloader("https://download.jetbrains.com/idea/ideaIU-2022.2.3.exe?test=123")
+	//d.Start()
+	//logrus.Infof("downloader: %+v", d)
 }
 
 func main() {

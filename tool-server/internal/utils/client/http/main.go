@@ -36,6 +36,16 @@ func Post(url string, params map[string]string, body any) []byte {
 	return res.Body()
 }
 
+func Head(url string) *resty.Response {
+	logrus.Tracef("Http Head: %+v", url)
+	res, err := httpClient.R().
+		Head(url)
+	if err != nil {
+		logrus.Errorf("Http Head Error, url: %s, error: %+v", url, err)
+	}
+	return res
+}
+
 func SetHeaders(headers map[string]string) {
 	httpClient.SetHeaders(headers)
 }
