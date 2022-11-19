@@ -78,7 +78,7 @@ func init() {
 	global.DBMaxThread = make(chan struct{}, config.Int("database.maxOpenConn"))
 
 	// test 代码
-	//d := downloader.CreateDownloader("https://download.jetbrains.com/idea/ideaIU-2022.2.3.exe?test=123")
+	//d := downloader.CreateDownloader("https://download.jetbrains.com/idea/ideaIU-2022.2.3.exe?test=123", "C:\\Users\\marui\\Downloads")
 	//d.Start()
 	//logrus.Infof("downloader: %+v", d)
 }

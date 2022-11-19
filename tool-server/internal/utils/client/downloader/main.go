@@ -28,23 +28,25 @@ var (
 )
 
 type Downloader struct {
-	URL            string         `json:"url"`
-	HeadResponse   *http.Response `json:"headResponse"`
-	Status         string         `json:"status"`
-	Filename       string         `json:"filename"`
-	SizeTotle      int64          `json:"sizeTotle"`
-	SizeDownloaded int64          `json:"sizeDownloaded"`
-	DownloadModel  string         `json:"downloadModel"`
-	Thread         int            `json:"thread"`
-	DownloadDir    string         `json:"downloadDir"`
+	URL            string `json:"url"`
+	headResponse   *http.Response
+	Status         string `json:"status"`
+	Filename       string `json:"filename"`
+	SizeTotle      int64  `json:"sizeTotle"`
+	SizeDownloaded int64  `json:"sizeDownloaded"`
+	DownloadModel  string `json:"downloadModel"`
+	Thread         int    `json:"thread"`
+	DownloadDir    string `json:"downloadDir"`
+	lock           *sync.RWMutex
 }
 
-func CreateDownloader(url string) *Downloader {
+func CreateDownloader(url string, downloaderDir string) *Downloader {
 	return &Downloader{
 		URL:           url,
 		Thread:        8,
 		DownloadModel: MODEL_MULTIPLE,
-		DownloadDir:   "C:\\Users\\marui\\Downloads",
+		DownloadDir:   downloaderDir,
+		lock:          new(sync.RWMutex),
 	}
 }
 
@@ -56,37 +58,37 @@ func (d *Downloader) getHeadResponse() {
 		return
 	}
 	logrus.Infof("%+v", res.Header)
-	d.HeadResponse = res
+	d.headResponse = res
 }
 
 func (d *Downloader) checkUrlValid() {
-	if d.HeadResponse == nil {
+	if d.headResponse == nil {
 		d.Status = STATUS_FAILED
 		return
 	}
-	if d.HeadResponse.StatusCode != http.StatusOK {
+	if d.headResponse.StatusCode != http.StatusOK {
 		d.Status = STATUS_FAILED
 		logrus.Errorf("check url vaild unpass")
 	}
 }
 
 func (d *Downloader) checkSupportMultiple() {
-	if d.HeadResponse == nil {
+	if d.headResponse == nil {
 		d.Status = STATUS_FAILED
 		return
 	}
-	if d.HeadResponse.Header.Get("Accept-Ranges") != "bytes" {
+	if d.headResponse.Header.Get("Accept-Ranges") != "bytes" {
 		d.Status = STATUS_FAILED
 		logrus.Errorf("check support multiple unpass")
 	}
 }
 
 func (d *Downloader) getFileInfo() {
-	if d.HeadResponse == nil {
+	if d.headResponse == nil {
 		d.Status = STATUS_FAILED
 		return
 	}
-	size, err := strconv.ParseInt(d.HeadResponse.Header.Get("Content-Length"), 10, 64)
+	size, err := strconv.ParseInt(d.headResponse.Header.Get("Content-Length"), 10, 64)
 	if err != nil {
 		logrus.Warnf("get file size failed, use single model: %+v", err)
 		d.DownloadModel = MODEL_SINGLE
@@ -143,10 +145,6 @@ func (d *Downloader) download() {
 				bufferFileList.Set(uuid.New().String()+".download", []int64{start, bufferList[index+1]})
 			}
 		}
-		//for _, item := range bufferFileList.Keys {
-		//	logrus.Infof(item, bufferFileList.Get(item))
-		//}
-		//return
 
 		// 开始分块下载
 		wg := sync.WaitGroup{}
@@ -211,22 +209,32 @@ func (d *Downloader) downloader(rangeStart int64, rangeEnd int64, filename strin
 		nr, er := resp.Body.Read(buf)
 		if nr > 0 {
 			nw, ew := tmpFile.Write(buf[0:nr])
+			d.lock.Lock()
 			d.SizeDownloaded += int64(nw)
-			logrus.Infof("进度：%d/%d", d.SizeDownloaded, d.SizeTotle)
+			d.lock.Unlock()
+			//logrus.Infof("进度：%d/%d", d.SizeDownloaded, d.SizeTotle)
 			if ew != nil {
-				logrus.Errorf("buff error : %+v", ew)
-				d.Status = STATUS_FAILED
+				logrus.Errorf("buff error : %+v, 即将重试", ew)
+				tmpFile.Close()
+				os.Remove(d.DownloadDir + string(filepath.Separator) + filename)
+				d.downloader(rangeStart, rangeEnd, filename)
 				break
 			}
 			if nr != nw {
-				logrus.Errorf("buff error: %+v", io.ErrShortBuffer)
+				logrus.Errorf("buff error: %+v, 即将重试", io.ErrShortBuffer)
+				tmpFile.Close()
+				os.Remove(d.DownloadDir + string(filepath.Separator) + filename)
+				d.downloader(rangeStart, rangeEnd, filename)
 				break
 			}
 		}
 		if er != nil {
 			if er != io.EOF {
 				if er != nil {
-					logrus.Errorf("buff error: %+v", er)
+					logrus.Errorf("buff error: %+v, 即将重试", er)
+					tmpFile.Close()
+					os.Remove(d.DownloadDir + string(filepath.Separator) + filename)
+					d.downloader(rangeStart, rangeEnd, filename)
 					break
 				}
 			}
