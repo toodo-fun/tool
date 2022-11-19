@@ -20,7 +20,7 @@ func init() {
 		Status:       "uninstall",
 		DownloadUrl:  "https://github.com/zhongyang219/TrafficMonitor/releases/download/V1.84.1/TrafficMonitor_V1.84.1_x64.zip",
 		DownloadInfo: "",
-		StartCmd:     "/extraTools/TrafficMonitor/TrafficMonitor.exe",
+		StartCmd:     "/extraTools/TrafficMonitor/TrafficMonitor/TrafficMonitor.exe",
 		CreateAt:     time.Time{},
 		UpdateAt:     time.Time{},
 	}
@@ -37,7 +37,7 @@ func init() {
 		Status:       "uninstall",
 		DownloadUrl:  "https://github.com/dotnetcore/FastGithub/releases/download/2.1.4/fastgithub_win-x64.zip",
 		DownloadInfo: "",
-		StartCmd:     "/extraTools/fastgithub_win-x64/FastGithub.UI.exe",
+		StartCmd:     "/extraTools/FastGithub/fastgithub_win-x64/FastGithub.UI.exe",
 		CreateAt:     time.Time{},
 		UpdateAt:     time.Time{},
 	}
@@ -54,7 +54,7 @@ func init() {
 		Status:       "uninstall",
 		DownloadUrl:  "https://download.cpuid.com/cpu-z/cpu-z_2.03-cn.zip",
 		DownloadInfo: "",
-		StartCmd:     "/extraTools/cpu-z_2.03-cn/cpuz_x64.exe",
+		StartCmd:     "/extraTools/CPU-Z/cpuz_x64.exe",
 		CreateAt:     time.Time{},
 		UpdateAt:     time.Time{},
 	}

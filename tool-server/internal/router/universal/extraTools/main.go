@@ -75,7 +75,7 @@ func handleInstallExtraTool(c *gin.Context) {
 				service.ExtraToolService{}.Update(extraTool)
 				// 开始解压
 				logrus.Infof("开始解压")
-				err = zip.Unzip(extraToolPath+string(filepath.Separator)+downloadInstance.Filename, extraToolPath)
+				err = zip.Unzip(extraToolPath+string(filepath.Separator)+downloadInstance.Filename, extraToolPath+string(filepath.Separator)+extraTool.Title)
 				if err != nil {
 					logrus.Errorf("解压失败: %+v", err)
 					extraTool.Status = entity.STATUS_ERROR
