@@ -94,13 +94,13 @@ func (d *Downloader) getFileInfo() {
 		d.DownloadModel = MODEL_SINGLE
 	}
 	d.SizeTotle = size
+	d.Filename = path.Base(strings.Split(d.URL, "?")[0])
 
 	// 如果文件小于1MB，则使用单线程下载
-	if size/int64(d.Thread) < 1024*1024 {
+	if size/int64(d.Thread) < 1024*1024 || strings.Contains(d.Filename, ".zip") {
 		d.DownloadModel = MODEL_SINGLE
 	}
 
-	d.Filename = path.Base(strings.Split(d.URL, "?")[0])
 	logrus.Infof("文件名称: %s, 文件大小：%d, 下载模式: %s", d.Filename, size, d.DownloadModel)
 }
 

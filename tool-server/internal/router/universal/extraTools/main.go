@@ -11,6 +11,7 @@ import (
 	"time"
 	"tool-server/internal/core/response"
 	"tool-server/internal/core/router"
+	service3 "tool-server/internal/domain/universal/downloadSpeedUp/service"
 	service2 "tool-server/internal/domain/universal/downloader/service"
 	"tool-server/internal/domain/universal/extraTool/entity"
 	"tool-server/internal/domain/universal/extraTool/service"
@@ -41,8 +42,16 @@ func handleInstallExtraTool(c *gin.Context) {
 	if !path.IsExist(extraToolPath) {
 		os.MkdirAll(extraToolPath, 0655)
 	}
+
+	speedUpInfo := service3.GetDownloadSpeedUpInfo(extraTool.DownloadUrl)
+	if speedUpInfo.Status != "Failed" {
+		extraTool.DownloadUrl = speedUpInfo.DlURL
+		logrus.Infof("加速下载解析成功，使用加速的地址进行下载: %+v", extraTool.DownloadUrl)
+	}
+
 	instanceId := service2.CreateDownloadTask(extraTool.DownloadUrl, extraToolPath)
 	extraTool.Status = entity.STATUS_INSTALLING
+	service.ExtraToolService{}.Update(extraTool)
 	c.JSON(http.StatusOK, response.DefaultSuccessResponse())
 	go func() {
 		for {
@@ -66,9 +75,14 @@ func handleInstallExtraTool(c *gin.Context) {
 				service.ExtraToolService{}.Update(extraTool)
 				// 开始解压
 				logrus.Infof("开始解压")
-				zip.Unzip(extraToolPath+string(filepath.Separator)+downloadInstance.Filename, extraToolPath)
-				logrus.Infof("解压完成")
-				extraTool.Status = entity.STATUS_INSTALLED
+				err = zip.Unzip(extraToolPath+string(filepath.Separator)+downloadInstance.Filename, extraToolPath)
+				if err != nil {
+					logrus.Errorf("解压失败: %+v", err)
+					extraTool.Status = entity.STATUS_ERROR
+				} else {
+					logrus.Infof("解压完成")
+					extraTool.Status = entity.STATUS_INSTALLED
+				}
 				service.ExtraToolService{}.Update(extraTool)
 				break
 			}
