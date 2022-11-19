@@ -8,6 +8,11 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/extraTools',
+    name: 'extraTools',
+    component: () => import(/* webpackChunkName: "extraTools" */ '../views/ExtraToolsView.vue')
+  },
+  {
     path: '/windows',
     name: 'windows',
     component: () => import(/* webpackChunkName: "windows" */ '../views/WindowsView.vue')

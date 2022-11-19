@@ -7,7 +7,7 @@
             <CellCardItem title="文件下载加速" desc="对下载慢的资源进行下载加速"
               avatar="https://tse2-mm.cn.bing.net/th/id/OIP-C.8nh6EUsftutQ7OS27lZ2EAHaE8?pid=ImgDet&rs=1">
               <template #right>
-                <el-button type="primary" :icon="Edit" text @click="$router.push('/downloadSpeedUp')">打开</el-button>
+                <el-button type="primary" text @click="$router.push('/downloadSpeedUp')">打开</el-button>
               </template>
             </CellCardItem>
           </el-col>
@@ -15,7 +15,7 @@
             <CellCardItem title="Windows工具" desc="Windows优化工具合集"
               avatar="https://cdn.windowsreport.com/wp-content/uploads/2019/12/Windows-7-1.jpg">
               <template #right>
-                <el-button type="primary" :icon="Edit" text @click="$router.push('/windows')">打开</el-button>
+                <el-button type="primary" text @click="$router.push('/windows')">打开</el-button>
               </template>
             </CellCardItem>
           </el-col>
@@ -23,7 +23,7 @@
             <CellCardItem title="PDF合并工具" desc="PDF合并工具，支持将多个PDF文件合并为同一个文件"
               avatar="https://i0.wp.com/null48.com/wp-content/uploads/2018/01/PDF-Reader-Pro-Ipa-App-iOS-Free-Download.jpg">
               <template #right>
-                <el-button type="primary" :icon="Edit" text @click="$router.push('/pdfMerge')">打开</el-button>
+                <el-button type="primary" text @click="$router.push('/pdfMerge')">打开</el-button>
               </template>
             </CellCardItem>
           </el-col>
@@ -31,7 +31,7 @@
             <CellCardItem title="PDF分割工具" desc="PDF分割工具，支持将一个PDF分割为多个文件"
               avatar="https://i0.wp.com/null48.com/wp-content/uploads/2018/01/PDF-Reader-Pro-Ipa-App-iOS-Free-Download.jpg">
               <template #right>
-                <el-button type="primary" :icon="Edit" text @click="$router.push('/pdfSplit')">打开</el-button>
+                <el-button type="primary" text @click="$router.push('/pdfSplit')">打开</el-button>
               </template>
             </CellCardItem>
           </el-col>

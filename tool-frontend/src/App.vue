@@ -6,11 +6,11 @@
           <el-col :span="3" style="text-align: left">
             <div class="header-title">
               <el-avatar class="header-avatar" size="small" src="/favicon.ico" />
-              <!-- <div>兔儿工具箱</div> -->
+              <div>兔儿工具箱</div>
             </div>
           </el-col>
           <el-col :span="18" class="header-message">
-            也许命运扼住你的咽喉，只是让你少吃两口。
+            <!-- 也许命运扼住你的咽喉，只是让你少吃两口。 -->
           </el-col>
           <el-col :span="3" class="header-tool" style="text-align: right; padding-right: 6px;">
             <el-button-group class="ml-4" size="small">
@@ -69,7 +69,7 @@
               </el-icon>
               <template #title>Windows工具</template>
             </el-menu-item>
-            <!-- <el-menu-item index="/pdfMerge">
+            <el-menu-item index="/extraTools">
               <el-icon size="24">
                 <svg t="1668430758746" class="icon" viewBox="0 0 1024 1024" version="1.1"
                   xmlns="http://www.w3.org/2000/svg" p-id="1146" width="200" height="200">
@@ -79,7 +79,7 @@
                 </svg>
               </el-icon>
               <template #title>开发者工具</template>
-            </el-menu-item> -->
+            </el-menu-item>
           </el-menu>
           <div class="aside-tool">
             <el-button type="danger" v-if="!isCollapse" circle @click="handleCollapse">
@@ -137,7 +137,7 @@ html body {
     line-height: var(--header-height);
     display: flex;
     font-size: small;
-    font-weight: 600;
+    font-weight: bold;
     align-items: center;
 
     .header-avatar {
@@ -147,8 +147,8 @@ html body {
 
   .header-message {
     font-size: small;
-    border: 1px solid #fff;
-    border-style: none solid;
+    // border: 1px solid #fff;
+    // border-style: none solid;
     padding: 0 8px;
   }
 

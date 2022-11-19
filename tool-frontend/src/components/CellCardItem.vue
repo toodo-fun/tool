@@ -1,7 +1,7 @@
 <template>
   <div class="cell-card-item">
     <div style="display: flex;">
-      <el-avatar v-if="avatar" shape="square" :src="avatar" style="margin-right: 8px" />
+      <el-avatar v-if="avatar" shape="square" :src="avatar" style="margin-right: 8px; background: transparent;" />
       <div>
         <div class="cell-card-item-title">{{ title }}</div>
         <div class="cell-card-item-desc" v-if="desc">{{ desc }}</div>
