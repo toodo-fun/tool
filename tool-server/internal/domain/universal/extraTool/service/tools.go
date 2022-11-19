@@ -46,6 +46,23 @@ func init() {
 		logrus.Infof("FastGithub已存在")
 	}
 
+	extraTool = entity.ExtraTool{
+		ID:           "CPU-Z",
+		Title:        "CPU-Z",
+		Describe:     "CPU-Z可以查看CPU基础信息、CPU频率、功耗等信息。",
+		Icon:         "https://www.cpuid.com/medias/images/softwares/cpu-z.svg",
+		Status:       "uninstall",
+		DownloadUrl:  "https://download.cpuid.com/cpu-z/cpu-z_2.03-cn.zip",
+		DownloadInfo: "",
+		StartCmd:     "/extraTools/cpu-z_2.03-cn/cpuz_x64.exe",
+		CreateAt:     time.Time{},
+		UpdateAt:     time.Time{},
+	}
+	err = ExtraToolService{}.Insert(extraTool)
+	if err != nil {
+		logrus.Infof("CPU-Z")
+	}
+
 	// 状态归位
 	extraTools, err := ExtraToolService{}.List(entity.ExtraTool{})
 	for _, item := range extraTools {

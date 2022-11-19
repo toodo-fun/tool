@@ -83,6 +83,7 @@ func handleInstallExtraTool(c *gin.Context) {
 					logrus.Infof("解压完成")
 					extraTool.Status = entity.STATUS_INSTALLED
 				}
+				os.Remove(extraToolPath + string(filepath.Separator) + downloadInstance.Filename)
 				service.ExtraToolService{}.Update(extraTool)
 				break
 			}
