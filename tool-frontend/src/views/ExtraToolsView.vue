@@ -8,7 +8,8 @@
                         <div style="display: flex; justify-content: flex-end;">
                             <el-button v-if="item.status == 'uninstall'" type="info" text plain @click="install(item)">
                                 安装</el-button>
-                            <el-button v-if="item.status == 'installed'" type="primary" text plain @click="start(item.startCmd)">启动</el-button>
+                            <el-button v-if="item.status == 'installed'" type="primary" text plain
+                                @click="start(item.startCmd)">启动</el-button>
                         </div>
                     </template>
                 </CardItem>
@@ -51,14 +52,18 @@ export default {
             })
         },
         getPercent(info) {
-            const i = JSON.parse(info)
-            return Math.trunc(i.downloaded / i.total * 100) ? Math.trunc(i.downloaded / i.total * 100) : 0 
+            try {
+                const i = JSON.parse(info)
+                return Math.trunc(i.downloaded / i.total * 100) ? Math.trunc(i.downloaded / i.total * 100) : 0
+            } catch (error) {
+                return 0
+            }
         },
         install(item) {
             this.loading = true
             const url = "/extraTool/install"
             this.$service.post(url, item).then(() => {
-                this.loading= false
+                this.loading = false
             })
         },
         start(cmd) {
