@@ -43,6 +43,9 @@ func handleInstallExtraTool(c *gin.Context) {
 		os.MkdirAll(extraToolPath, 0655)
 	}
 
+	extraTool.Status = entity.STATUS_INSTALLING
+	service.ExtraToolService{}.Update(extraTool)
+
 	speedUpInfo := service3.GetDownloadSpeedUpInfo(extraTool.DownloadUrl)
 	if speedUpInfo.Status != "Failed" {
 		extraTool.DownloadUrl = speedUpInfo.DlURL
@@ -50,8 +53,6 @@ func handleInstallExtraTool(c *gin.Context) {
 	}
 
 	instanceId := service2.CreateDownloadTask(extraTool.DownloadUrl, extraToolPath)
-	extraTool.Status = entity.STATUS_INSTALLING
-	service.ExtraToolService{}.Update(extraTool)
 	c.JSON(http.StatusOK, response.DefaultSuccessResponse())
 	go func() {
 		for {
