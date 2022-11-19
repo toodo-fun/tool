@@ -112,6 +112,9 @@ func (d *Downloader) download() {
 			file = d.DownloadDir + string(filepath.Separator) + strconv.Itoa(c) + "-" + d.Filename
 			c += 1
 		} else {
+			if c != 1 {
+				d.Filename = strconv.Itoa(c) + "-" + d.Filename
+			}
 			break
 		}
 	}

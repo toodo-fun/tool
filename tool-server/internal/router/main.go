@@ -9,6 +9,7 @@ import (
 	"tool-server/internal/core/router"
 	"tool-server/internal/router/universal/downloadSpeedUp"
 	"tool-server/internal/router/universal/downloader"
+	"tool-server/internal/router/universal/extraTools"
 	"tool-server/internal/router/universal/pdfProcess"
 	"tool-server/internal/router/windows/contextMenu"
 	"tool-server/internal/router/windows/platform"
@@ -37,6 +38,7 @@ func CreateRoute() *gin.Engine {
 	downloadSpeedUp.InitRouter()
 	pdfProcess.InitRouter()
 	downloader.InitRouter()
+	extraTools.InitRouter()
 
 	InitHealthRouter()
 

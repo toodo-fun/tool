@@ -3,7 +3,9 @@
 */dist
 **/*.exe
 tool-server/db
+tool-server/extraTools
 db
+extraTools
 
 # local env files
 .env.local
