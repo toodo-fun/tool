@@ -1,11 +1,13 @@
 <template>
     <div class="card-item">
-        <div class="card-item-head">
-            <div>{{ title }}</div>
-            <el-avatar v-if="icon" shape="square" :src="icon" :size="28" style="background: transparent;" />
-        </div>
-        <div class="card-item-body">
-            {{ describe }}
+        <div>
+            <div class="card-item-head">
+                <div>{{ title }}</div>
+                <el-avatar v-if="icon" shape="square" :src="icon" :size="28" style="background: transparent;" />
+            </div>
+            <div class="card-item-body">
+                {{ describe }}
+            </div>
         </div>
         <div>
             <slot name="footer"></slot>
@@ -31,6 +33,10 @@ export default {
     box-sizing: border-box;
     border-radius: 8px;
     margin: 12px 0 0 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card-item-head {

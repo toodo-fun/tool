@@ -1,7 +1,8 @@
 release:
   # 命名规范：主版本号.子版本号.阶段版本号-发布日期-开发阶段(alpha/beta/release)
-  - version: 1.0.1-221113-alpha
+  - version: 1.0.1-230101-alpha
     changelog:
+      - "[A] 工具合集增加TrafficMonitor、FastGithub、CPU-Z"
       - "[A] 增加工具合集"
       - "[A] 增加PDF分割工具"
       - "[A] 增加PDF合并工具"

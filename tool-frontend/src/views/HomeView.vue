@@ -2,20 +2,28 @@
   <div class="home" v-loading="loading" element-loading-text="服务启动中...">
     <el-row :gutter="8">
       <el-col :span="16">
-        <el-row :gutter="8">
+        <el-row :gutter="0">
+          <el-col :span="12">
+            <CellCardItem title="软件中心" desc="实用工具合集"
+              avatar="https://ts1.cn.mm.bing.net/th/id/R-C.9d09099ba1df66d3a9ea863aebb19896?rik=u4PHIm89aMvczw&riu=http%3a%2f%2fwww.ambition-soft.com%2fupload%2fimage%2f20200927%2f20200927141007_7963.jpg&ehk=s9qTSE04X0bx%2fKVB9odZtOc76rFsMS5cbKLHx4JU51s%3d&risl=&pid=ImgRaw&r=0">
+              <template #right>
+                <el-button type="primary" text @click="$router.push('/extraTools')">打开</el-button>
+              </template>
+            </CellCardItem>
+          </el-col>
+          <el-col :span="12">
+            <CellCardItem title="Windows工具" desc="Windows优化工具合集"
+              avatar="https://cdn.windowsreport.com/wp-content/uploads/2019/12/Windows-7-1.jpg">
+              <template #right>
+                <el-button type="primary" text @click="$router.push('/windows')">打开</el-button>
+              </template>
+            </CellCardItem>
+          </el-col>
           <el-col :span="24">
             <CellCardItem title="文件下载加速" desc="对下载慢的资源进行下载加速"
               avatar="https://tse2-mm.cn.bing.net/th/id/OIP-C.8nh6EUsftutQ7OS27lZ2EAHaE8?pid=ImgDet&rs=1">
               <template #right>
                 <el-button type="primary" text @click="$router.push('/downloadSpeedUp')">打开</el-button>
-              </template>
-            </CellCardItem>
-          </el-col>
-          <el-col :span="24">
-            <CellCardItem title="Windows工具" desc="Windows优化工具合集"
-              avatar="https://cdn.windowsreport.com/wp-content/uploads/2019/12/Windows-7-1.jpg">
-              <template #right>
-                <el-button type="primary" text @click="$router.push('/windows')">打开</el-button>
               </template>
             </CellCardItem>
           </el-col>
