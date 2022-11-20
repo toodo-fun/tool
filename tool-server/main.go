@@ -4,14 +4,13 @@ import (
 	"fmt"
 	"github.com/gookit/config/v2"
 	"github.com/sirupsen/logrus"
+	"tool-server/internal/core/platform/update"
 	"tool-server/internal/router"
 )
 
 func init() {
-	// test 代码
-	//d := downloader.CreateDownloader("https://download.jetbrains.com/idea/ideaIU-2022.2.3.exe?test=123", "C:\\Users\\marui\\Downloads")
-	//d.Start()
-	//logrus.Infof("downloader: %+v", d)
+	releaseInfo := update.CheckReleaseUpdate()
+	logrus.Infof("%+v", releaseInfo)
 }
 
 func main() {

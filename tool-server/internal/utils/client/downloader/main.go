@@ -131,7 +131,7 @@ func (d *Downloader) download() {
 		var bufferList []int64
 		for i := 0; i <= d.Thread; i++ {
 			tmpSize := int64(i) * bufferSize
-			if tmpSize > d.SizeTotle {
+			if i == d.Thread {
 				tmpSize = d.SizeTotle
 			}
 			bufferList = append(bufferList, tmpSize)

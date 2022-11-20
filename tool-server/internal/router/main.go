@@ -7,12 +7,12 @@ import (
 	"net/http"
 	"tool-server/internal/core/response"
 	"tool-server/internal/core/router"
+	"tool-server/internal/router/platform"
 	"tool-server/internal/router/universal/downloadSpeedUp"
 	"tool-server/internal/router/universal/downloader"
 	"tool-server/internal/router/universal/extraTools"
 	"tool-server/internal/router/universal/pdfProcess"
 	"tool-server/internal/router/windows/contextMenu"
-	"tool-server/internal/router/windows/platform"
 )
 
 func handleNotFound(c *gin.Context) {
