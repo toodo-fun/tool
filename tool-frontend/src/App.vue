@@ -105,6 +105,18 @@
         </el-aside>
         <el-main>
           <router-view />
+          <el-dialog v-model="dialogUpdateVisible" :title="'检测到新版本' + releaseInfo.tag_name" align-center
+            :show-close="false">
+            <div v-for="o in releaseInfo.body.split('\n')" :key="o">{{ o }}</div>
+            <template #footer>
+              <span class="dialog-footer">
+                <el-button @click="dialogUpdateVisible = false">下次再说</el-button>
+                <el-button type="primary" @click="update">
+                  立即更新
+                </el-button>
+              </span>
+            </template>
+          </el-dialog>
         </el-main>
       </el-container>
     </el-container>
@@ -237,17 +249,35 @@ const ipcRenderer = window.electron.ipcRenderer
 export default {
   data: function () {
     return {
-      isCollapse: ref(true)
+      isCollapse: ref(true),
+      dialogUpdateVisible: ref(false),
+      releaseInfo: {}
     }
   },
   setup() {
 
   },
   mounted() {
+    // 自动更新
+    const url = "/platform/checkUpdate"
+    this.$service.get(url).then((res) => {
+      this.releaseInfo = res
+      if (res.update) {
+        this.dialogUpdateVisible = true
+      }
+    })
   },
   methods: {
+    update() {
+      this.dialogUpdateVisible = false
+      const url = "/platform/update?url=" + this.releaseInfo.assets[0].browser_download_url
+      this.$service.get(url).then((res) => {
+        if (res) {
+          window.openDefaultBrowser("./resources/server/" + res)
+        }
+      })
+    },
     handleCollapse() {
-      console.log(123);
       this.isCollapse = !this.isCollapse
     },
     forceBlur(evt) {
