@@ -97,7 +97,7 @@ func (d *Downloader) getFileInfo() {
 	d.Filename = path.Base(strings.Split(d.URL, "?")[0])
 
 	// 如果文件小于1MB，则使用单线程下载
-	if size/int64(d.Thread) < 1024*1024 || strings.Contains(d.Filename, ".zip") {
+	if size/int64(d.Thread) < 1024*1024 {
 		d.DownloadModel = MODEL_SINGLE
 	}
 
