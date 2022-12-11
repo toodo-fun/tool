@@ -46,20 +46,41 @@
         </el-row>
       </el-col>
       <el-col :span="8" style="background: rgba(255, 255, 255, 0.8); ">
-        <div style="padding: 8px; font-size:small">应用更新日志</div>
-        <el-timeline style="padding: 8px;">
-          <el-timeline-item center v-for="(item, index) in changelog" :key="index" color="#0bbd87" placement="top">
-            <el-card>
-              <div style="font-weight: bold; padding-bottom: 8px;">{{ item.version }}</div>
-              <div style="font-size: small; line-height: 22px;" v-for="(i, idx) in item.changelog" :key="idx">{{ i }}</div>
-            </el-card>
-          </el-timeline-item>
-          <el-timeline-item center placement="top">
-            <el-card>
-              <div style="font-weight: bold; padding-bottom: 8px;">我们开始出发啦</div>
-            </el-card>
-          </el-timeline-item>
-        </el-timeline>
+        <div style="display: flex; justify-content: space-between; flex-direction: column;">
+          <div>
+            <div style="padding: 8px; font-size:small;">获取更多精彩内容</div>
+            <el-row style="margin-bottom: 8px;">
+              <el-col :span="12" style="text-align: center">
+                <el-image style=""
+                  :src="require('../assets/qrcode_for_gh_bd8bca8aadc4_258.jpg')" fit="cover" />
+                  <div style="font-size: 12px;">草莓橙汁儿</div>
+              </el-col>
+              <el-col :span="12" style="text-align: center">
+                <el-image style=""
+                  :src="require('../assets/qrcode_for_gh_d7ec3a9e36b4_258.jpg')" fit="cover" />
+                  <div style="font-size: 12px">云原生技术研究院</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div>
+            <div style="padding: 8px; font-size:small">应用更新日志</div>
+            <el-timeline style="padding: 8px;">
+              <el-timeline-item center v-for="(item, index) in changelog" :key="index" color="#0bbd87" placement="top">
+                <el-card>
+                  <div style="font-weight: bold; padding-bottom: 8px;">{{ item.version }}</div>
+                  <div style="font-size: small; line-height: 22px;" v-for="(i, idx) in item.changelog" :key="idx">{{ i
+                  }}
+                  </div>
+                </el-card>
+              </el-timeline-item>
+              <!-- <el-timeline-item center placement="top">
+                <el-card>
+                  <div style="font-weight: bold; padding-bottom: 8px;">我们开始出发啦</div>
+                </el-card>
+              </el-timeline-item> -->
+            </el-timeline>
+          </div>
+        </div>
       </el-col>
     </el-row>
   </div>
