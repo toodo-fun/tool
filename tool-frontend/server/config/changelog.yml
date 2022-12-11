@@ -1,5 +1,8 @@
 release:
   # 命名规范：主版本号.子版本号.阶段版本号-发布日期-开发阶段(alpha/beta/release)
+  - version: 1.0.1-221211-beta
+    changelog:
+      - "[A] 增加联系我们"
   - version: 1.0.1-230101-beta
     changelog:
       - "[A] 增加自动更新"
