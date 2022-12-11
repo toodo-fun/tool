@@ -5,7 +5,6 @@ go 1.19
 require (
 	github.com/antonfisher/nested-logrus-formatter v1.3.1
 	github.com/axgle/mahonia v0.0.0-20180208002826-3358181d7394
-	github.com/elliotchance/orderedmap v1.5.0
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/google/uuid v1.3.0
