@@ -141,7 +141,7 @@ export default {
 
 <style lang="less" scoped>
 .PDF {
-    background: rgba(255, 255, 255, 0.8);
+    background: transparent;
     height: 100%;
     width: 100%;
     box-sizing: border-box;

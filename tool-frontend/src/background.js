@@ -34,6 +34,7 @@ async function createWindow() {
     width: winWidth,
     minWidth: 850,
     height: winHeight,
+    transparent: true,
     minHeight: 525,
     frame: false,
     webPreferences: {

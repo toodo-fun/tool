@@ -1,41 +1,10 @@
 <template>
   <div class="common-layout">
     <el-container class="main-container">
-      <el-header>
-        <el-row justify="space-between">
-          <el-col :span="3" style="text-align: left">
-            <div class="header-title">
-              <el-avatar class="header-avatar" size="small" src="/favicon.ico" />
-              <div>兔儿工具箱</div>
-            </div>
-          </el-col>
-          <el-col :span="18" class="header-message">
-            <!-- 也许命运扼住你的咽喉，只是让你少吃两口。 -->
-          </el-col>
-          <el-col :span="3" class="header-tool" style="text-align: right; padding-right: 6px;">
-            <el-button-group class="ml-4" size="small">
-              <el-button color="transparent" text @click="bthMinimize">
-                <el-icon color="gray">
-                  <SemiSelect />
-                </el-icon>
-              </el-button>
-              <el-button color="transparent" text @click="btnMaximize">
-                <el-icon color="gray">
-                  <FullScreen />
-                </el-icon>
-              </el-button>
-              <el-button color="transparent" text @click="btnWinClose">
-                <el-icon color="gray">
-                  <CloseBold />
-                </el-icon>
-              </el-button>
-            </el-button-group>
-          </el-col>
-        </el-row>
-      </el-header>
       <el-container>
         <el-aside>
-          <el-menu :default-active="$route.path" class="el-menu-vertical-demo" :collapse="isCollapse" router>
+          <el-menu :default-active="$route.path" class="el-menu-vertical-demo" :collapse="isCollapse"
+            text-color="rgba(255,255,255,1)" active-text-color="rgba(255,255,255,1)" router>
             <el-menu-item index="/">
               <el-icon size="24">
                 <svg t="1668430775193" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -67,7 +36,7 @@
                     p-id="1005"></path>
                 </svg>
               </el-icon>
-              <template #title>Windows工具</template>
+              <template #title>优化工具</template>
             </el-menu-item>
             <el-menu-item index="/extraTools">
               <el-icon size="24">
@@ -78,7 +47,7 @@
                     p-id="999"></path>
                 </svg>
               </el-icon>
-              <template #title>工具中心</template>
+              <template #title>软件中心</template>
             </el-menu-item>
             <!-- <el-menu-item index="/extraTools">
               <el-icon size="24">
@@ -93,31 +62,66 @@
             </el-menu-item> -->
           </el-menu>
           <div class="aside-tool">
-            <el-button type="danger" v-if="!isCollapse" circle @click="handleCollapse">
+            <!-- <el-button type="danger" circle @click="handleCollapse">
               <el-icon v-if="isCollapse">
                 <DArrowRight />
               </el-icon>
               <el-icon v-else>
                 <DArrowLeft />
               </el-icon>
-            </el-button>
+            </el-button> -->
           </div>
         </el-aside>
-        <el-main>
-          <router-view />
-          <el-dialog v-model="dialogUpdateVisible" :title="'检测到新版本' + releaseInfo.tag_name" align-center
-            :show-close="false">
-            <div v-for="o in releaseInfo.body.split('\n')" :key="o">{{ o }}</div>
-            <template #footer>
-              <span class="dialog-footer">
-                <el-button @click="dialogUpdateVisible = false">下次再说</el-button>
-                <el-button type="primary" @click="update">
-                  立即更新
-                </el-button>
-              </span>
-            </template>
-          </el-dialog>
-        </el-main>
+        <el-container>
+          <el-header>
+            <el-row justify="space-between">
+              <el-col :span="4" style="text-align: left">
+                <div class="header-title">
+                  <!-- <el-avatar class="header-avatar" size="small" src="/favicon.ico" /> -->
+                  <!-- <div>兔儿工具箱</div> -->
+                </div>
+              </el-col>
+              <el-col :span="16" class="header-message">
+                <!-- 也许命运扼住你的咽喉，只是让你少吃两口。 -->
+              </el-col>
+              <el-col :span="4" class="header-tool" style="text-align: right; padding-right: 6px;">
+                <el-button-group class="ml-4" size="small">
+                  <el-button color="transparent" text @click="bthMinimize">
+                    <el-icon color="black">
+                      <SemiSelect />
+                    </el-icon>
+                  </el-button>
+                  <el-button color="transparent" text @click="btnMaximize">
+                    <el-icon color="black">
+                      <FullScreen />
+                    </el-icon>
+                  </el-button>
+                  <el-button color="transparent" text @click="btnWinClose">
+                    <el-icon color="black">
+                      <CloseBold />
+                    </el-icon>
+                  </el-button>
+                </el-button-group>
+              </el-col>
+            </el-row>
+          </el-header>
+          <el-main>
+            <router-view />
+            <el-dialog v-model="dialogUpdateVisible" :title="'检测到新版本' + releaseInfo.tag_name" align-center
+              :show-close="false">
+              <div v-for="o in releaseInfo.body.split('\n')" :key="o">{{ o }}</div>
+              <template #footer>
+                <span class="dialog-footer">
+                  <el-button @click="dialogUpdateVisible = false">下次再说</el-button>
+                  <el-button type="primary" @click="update">
+                    立即更新
+                  </el-button>
+                </span>
+              </template>
+            </el-dialog>
+          </el-main>
+        </el-container>
+
       </el-container>
     </el-container>
   </div>
@@ -188,7 +192,7 @@ html body {
 
   .el-header,
   .el-footer {
-    background-color: var(--el-color-primary-light-7);
+    background-color: #F1F4FF;
     color: var(--el-text-color-primary);
     height: var(--header-height);
     line-height: var(--header-height);
@@ -197,12 +201,18 @@ html body {
   }
 
   .el-aside {
-    background-color: var(--el-color-primary-light-8);
-    color: var(--el-text-color-primary);
-    width: fit-content;
+    background-color: rgba(94, 107, 157, 1);
+    // color: white;
+    width: 150px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    .el-menu-item:hover,
+    .is-active {
+      background-color: rgba(74,89,146, 1);
+      border-left: 4px solid rgba(255, 255, 255, 0.6);
+    }
   }
 
   .el-menu {
@@ -210,7 +220,7 @@ html body {
   }
 
   .el-main {
-    background-color: var(--el-color-primary-light-9);
+    background-color: #F1F4FF;
     color: var(--el-text-color-primary);
     height: calc(100vh - var(--header-height));
     overflow: hidden;
@@ -249,7 +259,7 @@ const ipcRenderer = window.electron.ipcRenderer
 export default {
   data: function () {
     return {
-      isCollapse: ref(true),
+      isCollapse: ref(false),
       dialogUpdateVisible: ref(false),
       releaseInfo: {}
     }

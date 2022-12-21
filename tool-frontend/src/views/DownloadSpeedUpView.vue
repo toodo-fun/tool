@@ -114,7 +114,7 @@ export default {
     height: 100%;
     padding: 16px;
     box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.8);
+    background: transparent;
 }
 
 .downloadSpeedUp-result {

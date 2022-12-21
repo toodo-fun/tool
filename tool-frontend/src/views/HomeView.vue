@@ -66,12 +66,12 @@
             <div style="padding: 8px; font-size:small">应用更新日志</div>
             <el-timeline style="padding: 8px;">
               <el-timeline-item center v-for="(item, index) in changelog" :key="index" color="#0bbd87" placement="top">
-                <el-card>
+                <!-- <el-card> -->
                   <div style="font-weight: bold; padding-bottom: 8px;">{{ item.version }}</div>
                   <div style="font-size: small; line-height: 22px;" v-for="(i, idx) in item.changelog" :key="idx">{{ i
                   }}
                   </div>
-                </el-card>
+                <!-- </el-card> -->
               </el-timeline-item>
               <!-- <el-timeline-item center placement="top">
                 <el-card>
@@ -114,7 +114,7 @@ export default {
 
 <style lang="less" scoped>
 .home {
-  background: #f8f8f8;
+  background: transparent;
   height: 100%;
   width: 100%;
   box-sizing: border-box;

@@ -28,7 +28,7 @@ export default {
 
 <style lang="less" scoped>
 .card-item {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.6);
     padding: 8px;
     box-sizing: border-box;
     border-radius: 8px;

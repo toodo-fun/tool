@@ -26,13 +26,14 @@ export default {
 
 <style scoped lang="less">
 .cell-card-item {
-  width: 100%;
+  width: calc(100% - 8px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px;
   background: rgba(255, 255, 255, 0.8);
   box-sizing: border-box;
+  margin: 4px;
 
   &:not(:first-child) {
     border: 1px solid rgba(0, 0, 0, 0.1);
